@@ -15,4 +15,4 @@ def comment_schema(comment) -> dict:
     }
 
 def comments_schema(comments) ->list:
-    return [comment_schema(comment) for comment in comments]
+    return [comment_schema(comment) for comment in comments] 
