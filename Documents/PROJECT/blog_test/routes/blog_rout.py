@@ -31,7 +31,7 @@ async def update_post(id: str,blog: Blog):
     return{"status":"ok","data":blog}
 
 @blog_api_router.delete("/{id}")
-async def update_post(id: str):
+async def delete_post(id: str):
     collections_post.find_one_and_delete({"_id": ObjectId(id)})
     return{"status":"ok","data":[]}
 
@@ -40,3 +40,15 @@ async def comment_on_post(comment: Comment):
     _id = collection_comments.insert_one(dict(comment))
     comment = comments_schema(collection_comments.find({"_id": _id.inserted_id}))
     return {"status":"ok","data":comment}
+
+@blog_api_router.get("/comment/{id}")
+async def single_comment(id: str):
+   comment = comments_schema(collection_comments.find({"_id": ObjectId(id)}))
+   return {"status":"ok","data":comment}
+#all comments WORKS love
+@blog_api_router.get("/comment/all_comments/comments")
+async def all_comment():
+   comment = comments_schema(collection_comments.find())
+   return {"status":"ok","data":comment}
+
+
