@@ -1,7 +1,7 @@
 def blog_schema(blog) -> dict:
     return{
         "id": str(blog["_id"]),
-        "author": blog["author"],
+        "name": blog["name"],
         "title": blog["title"],
         "content": blog["content"]    
     }
