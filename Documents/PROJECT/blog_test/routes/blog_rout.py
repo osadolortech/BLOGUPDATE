@@ -45,7 +45,7 @@ async def comment_on_post(comment: Comment):
 async def single_comment(id: str):
    comment = comments_schema(collection_comments.find({"_id": ObjectId(id)}))
    return {"status":"ok","data":comment}
-#all comments WORKS
+#all comments WORKS love
 @blog_api_router.get("/comment/all_comments/comments")
 async def all_comment():
    comment = comments_schema(collection_comments.find())
