@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 class Blog(BaseModel):
-    name: str
+    author: str
     title: str
     content: str
 
