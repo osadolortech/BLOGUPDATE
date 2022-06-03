@@ -40,3 +40,9 @@ async def comment_on_post(comment: Comment):
     _id = collection_comments.insert_one(dict(comment))
     comment = comments_schema(collection_comments.find({"_id": _id.inserted_id}))
     return {"status":"ok","data":comment}
+
+@blog_api_router.get("/comment/{id}")
+async def single_comment(id: str):
+   comment = comments_schema(collection_comments.find({"_id": ObjectId(id)}))
+   return {"status":"ok","data":comment}
+
