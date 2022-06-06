@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from config.db import collections_post,collection_comments
-from models.blog_mod import Blog,Comment
+from models.blog_mod import Blog,Comment,ObjectIdStr
 from schemas.blog_sch import blog_schema,blogs_schema,comment_schema,comments_schema
 from bson import ObjectId
 
@@ -42,13 +42,13 @@ async def comment_on_post(comment: Comment):
     return {"status":"ok","data":comment}
 
 @blog_api_router.get("/comment/{id}")
-async def single_comment(id: str):
+async def single_comment(id: ObjectIdStr):
    comment = comments_schema(collection_comments.find({"_id": ObjectId(id)}))
    return {"status":"ok","data":comment}
 #all comments WORKS love
-@blog_api_router.get("/comment/all_comments/comments")
-async def all_comment():
-   comment = comments_schema(collection_comments.find())
+@blog_api_router.get("/comment/all_comments/{post}")
+async def all_comment(post: ObjectIdStr):
+   comment = comments_schema(collection_comments.find({"post": post}))
    return {"status":"ok","data":comment}
 
 
